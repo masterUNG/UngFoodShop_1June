@@ -11,7 +11,9 @@ class _AuthenState extends State<Authen> {
     return RaisedButton(
       color: Colors.pink[100],
       child: Text('Sign Up'),
-      onPressed: () {},
+      onPressed: () {
+        print('You Click Sign Up');
+      },
     );
   }
 
@@ -74,7 +76,7 @@ class _AuthenState extends State<Authen> {
       resizeToAvoidBottomPadding: false,
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Colors.white, Colors.pink[300]], begin: Alignment(-1, -1)),
+          gradient: LinearGradient(colors: [Colors.white, Colors.pink[200]], begin: Alignment(-1, -1)),
         ),
         padding: EdgeInsets.only(top: 60.0),
         alignment: Alignment(0, -1),
