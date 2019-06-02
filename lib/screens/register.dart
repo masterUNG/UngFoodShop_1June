@@ -7,10 +7,21 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  // Explicit
+  final formKey = GlobalKey<FormState>();
+
   Widget uploadButton() {
     return IconButton(
-      icon: Icon(Icons.cloud_upload, size: 36.0,),
-      onPressed: () {},
+      icon: Icon(
+        Icons.cloud_upload,
+        size: 36.0,
+      ),
+      onPressed: () {
+        print('You Click Upload');
+
+        // Check Valudate
+        if (formKey.currentState.validate()) {}
+      },
     );
   }
 
@@ -28,6 +39,11 @@ class _RegisterState extends State<Register> {
             TextStyle(color: Colors.pink[200], fontStyle: FontStyle.italic),
         labelStyle: TextStyle(fontSize: 18.0, color: Colors.pink[900]),
       ),
+      validator: (String value) {
+        if (value.length == 0) {
+          return 'Please Fill Name in The Blank';
+        }
+      },
     );
   }
 
@@ -44,7 +60,11 @@ class _RegisterState extends State<Register> {
         helperText: 'Type User in the Blank',
         helperStyle:
             TextStyle(color: Colors.blue[400], fontStyle: FontStyle.italic),
-      ),
+      ), validator: (String value){
+        if (value.length == 0) {
+          return 'Please Type Your User Here !!!';
+        }
+      },
     );
   }
 
@@ -61,7 +81,11 @@ class _RegisterState extends State<Register> {
         helperText: 'Password More 6 Charator',
         helperStyle:
             TextStyle(color: Colors.red[400], fontStyle: FontStyle.italic),
-      ),
+      ), validator: (String value){
+        if (value.length <= 5) {
+          return 'Please Type Password more 6 Charactor';
+        }
+      },
     );
   }
 
@@ -71,17 +95,21 @@ class _RegisterState extends State<Register> {
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         backgroundColor: Colors.pink[300],
-        title: Text('Register'),actions: <Widget>[uploadButton()],
+        title: Text('Register'),
+        actions: <Widget>[uploadButton()],
       ),
-      body: Container(
-        padding: EdgeInsets.only(top: 60.0, left: 50.0, right: 50.0),
-        alignment: Alignment(0, -1),
-        child: Column(
-          children: <Widget>[
-            nameTextFromField(),
-            userTextFromField(),
-            passwordTextFromField()
-          ],
+      body: Form(
+        key: formKey,
+        child: Container(
+          padding: EdgeInsets.only(top: 60.0, left: 50.0, right: 50.0),
+          alignment: Alignment(0, -1),
+          child: Column(
+            children: <Widget>[
+              nameTextFromField(),
+              userTextFromField(),
+              passwordTextFromField()
+            ],
+          ),
         ),
       ),
     );
